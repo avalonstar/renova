@@ -9,6 +9,7 @@ name = "pypi"
 
 django = "*"
 "psycopg2" = "*"
+black = "==18.3a4"
 
 
 [dev-packages]
