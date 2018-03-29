@@ -11,6 +11,8 @@ django = "*"
 "psycopg2" = "*"
 django-allauth = "*"
 mysqlclient = "*"
+dj-database-url = "*"
+python-dotenv = "*"
 
 
 [dev-packages]
