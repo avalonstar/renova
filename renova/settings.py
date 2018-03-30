@@ -110,6 +110,11 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_ADAPTER = 'authentication.adapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'authentication.adapters.SocialAccountAdapter'
+SOCIALACCOUNT_EMAIL_VERIFICATION = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
