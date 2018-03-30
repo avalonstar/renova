@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.functional import cached_property
 
-from ragnarok.models import Account
+from apps.ragnarok.models import Account
 
 
 class Player(AbstractUser):

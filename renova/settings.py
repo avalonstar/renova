@@ -44,8 +44,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.twitch',
-    'players',
-    'ragnarok',
+    'apps.authentication',
+    'apps.players',
+    'apps.ragnarok',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +88,7 @@ DATABASES = {
     'ragnarok': dj_database_url.parse(os.getenv('RAGNAROK_URL')),
 }
 
-DATABASE_ROUTERS = ['ragnarok.router.RagnarokRouter']
+DATABASE_ROUTERS = ['apps.ragnarok.router.RagnarokRouter']
 
 
 # Password validation
@@ -116,6 +117,7 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = False
 SOCIALACCOUNT_PROVIDERS = {'twitch': {'SCOPE': ['user_read', 'user_subscriptions']}}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
