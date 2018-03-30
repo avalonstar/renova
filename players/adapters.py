@@ -1,4 +1,4 @@
-from allauth.account.adatper import DefaultAccountAdapter
+from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 
