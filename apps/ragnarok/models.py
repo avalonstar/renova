@@ -1,6 +1,6 @@
 from django.db import models
 
-from .managers import AccountManager
+from .managers import AccountManager, CharacterManager
 
 
 class Account(models.Model):
@@ -96,6 +96,8 @@ class Character(models.Model):
     last_login = models.DateTimeField(blank=True, null=True)
     title_id = models.PositiveIntegerField()
     show_equip = models.PositiveIntegerField()
+
+    objects = CharacterManager()
 
     class Meta:
         ordering = ['account_id']
