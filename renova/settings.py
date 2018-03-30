@@ -14,128 +14,137 @@ import os
 
 import dj_database_url
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from configurations import Configuration, values
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+class Base(Configuration):
+    # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Application definition
+    # Quick-start development settings - unsuitable for production
+    # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.twitch',
-    'apps.authentication',
-    'apps.players',
-    'apps.ragnarok',
-]
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = values.BooleanValue(True)
 
-ROOT_URLCONF = 'renova.urls'
+    ALLOWED_HOSTS = []
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR + '/templates/'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ]
-        },
+    # Application definition
+
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'django.contrib.sites',
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        'allauth.socialaccount.providers.twitch',
+        'apps.authentication',
+        'apps.players',
+        'apps.ragnarok',
+    ]
+
+    MIDDLEWARE = [
+        'django.middleware.security.SecurityMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ]
+
+    ROOT_URLCONF = 'renova.urls'
+
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [BASE_DIR + '/templates/'],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ]
+            },
+        }
+    ]
+
+    WSGI_APPLICATION = 'renova.wsgi.application'
+
+    # Database
+    # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=None),
+        'ragnarok': dj_database_url.parse(os.getenv('RAGNAROK_URL'), conn_max_age=None),
     }
-]
 
-WSGI_APPLICATION = 'renova.wsgi.application'
+    DATABASE_ROUTERS = ['apps.ragnarok.router.RagnarokRouter']
 
+    # Password validation
+    # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
+        },
+        {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+        {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+        {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    ]
 
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=None),
-    'ragnarok': dj_database_url.parse(os.getenv('RAGNAROK_URL'), conn_max_age=None),
-}
+    AUTH_USER_MODEL = 'players.Player'
 
-DATABASE_ROUTERS = ['apps.ragnarok.router.RagnarokRouter']
+    AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.ModelBackend',
+        'allauth.account.auth_backends.AuthenticationBackend',
+    ]
 
+    ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+    ACCOUNT_ADAPTER = 'apps.authentication.adapters.AccountAdapter'
+    SOCIALACCOUNT_ADAPTER = 'apps.authentication.adapters.SocialAccountAdapter'
+    SOCIALACCOUNT_EMAIL_VERIFICATION = False
+    SOCIALACCOUNT_PROVIDERS = {'twitch': {'SCOPE': ['user_read', 'user_subscriptions']}}
 
-# Password validation
-# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
-    },
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
-]
-
-AUTH_USER_MODEL = 'players.Player'
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
-ACCOUNT_ADAPTER = 'apps.authentication.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'apps.authentication.adapters.SocialAccountAdapter'
-SOCIALACCOUNT_EMAIL_VERIFICATION = False
-SOCIALACCOUNT_PROVIDERS = {'twitch': {'SCOPE': ['user_read', 'user_subscriptions']}}
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
+    # Internationalization
+    # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+    TIME_ZONE = 'UTC'
 
-USE_I18N = True
+    USE_I18N = True
 
-USE_L10N = True
+    USE_L10N = True
 
-USE_TZ = True
+    USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+    STATIC_URL = '/static/'
 
-SITE_ID = 1
+    SITE_ID = 1
+
+
+class Development(Base):
+    DEBUG = values.BooleanValue(True)
+
+
+class Production(Base):
+    DEBUG = values.BooleanValue(False)
