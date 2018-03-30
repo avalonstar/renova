@@ -119,6 +119,7 @@ class Base(Configuration):
 
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+    LOGIN_REDIRECT_URL = 'dashboard'
 
     # Internationalization
     # https://docs.djangoproject.com/en/2.0/topics/i18n/

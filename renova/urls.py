@@ -18,8 +18,10 @@ from django.urls import include, path
 
 from apps.views import SiteView
 
+
 urlpatterns = [
     path('', SiteView.as_view(), name='site_home'),
+    path('', include('apps.players.urls')),
     path('accounts/', include('allauth.urls')),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
 ]
