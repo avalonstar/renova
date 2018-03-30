@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'renova.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(),
-    'ragnarok': dj_database_url.config(default=os.getenv('RAGNAROK_URL')),
+    'default': dj_database_url.config(conn_max_age=600),
+    'ragnarok': dj_database_url.parse(os.getenv('RAGNAROK_URL')),
 }
 
 
