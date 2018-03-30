@@ -26,7 +26,6 @@ class Account(models.Model):
     objects = AccountManager()
 
     class Meta:
-        managed = False
         db_table = 'login'
 
 
