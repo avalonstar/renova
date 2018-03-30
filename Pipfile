@@ -13,6 +13,7 @@ django-allauth = "*"
 mysqlclient = "*"
 dj-database-url = "*"
 python-dotenv = "*"
+django-configurations = "*"
 
 
 [dev-packages]
