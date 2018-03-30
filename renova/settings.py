@@ -87,6 +87,8 @@ DATABASES = {
     'ragnarok': dj_database_url.parse(os.getenv('RAGNAROK_URL')),
 }
 
+DATABASE_ROUTERS = ['ragnarok.router.RagnarokRouter']
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
