@@ -109,6 +109,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
