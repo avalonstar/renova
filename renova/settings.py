@@ -113,6 +113,7 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 ACCOUNT_ADAPTER = 'authentication.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'authentication.adapters.SocialAccountAdapter'
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
+SOCIALACCOUNT_PROVIDERS = {'twitch': {'SCOPE': ['user_read', 'user_subscriptions']}}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
