@@ -22,7 +22,11 @@ class Account(models.Model):
     objects = AccountManager()
 
     class Meta:
+        ordering = ['account_id']
         db_table = 'login'
+
+    def __str__(self):
+        return self.username
 
 
 class Character(models.Model):
@@ -94,5 +98,9 @@ class Character(models.Model):
     show_equip = models.PositiveIntegerField()
 
     class Meta:
+        ordering = ['account_id']
         managed = False
         db_table = 'char'
+
+    def __str__(self):
+        return self.name
