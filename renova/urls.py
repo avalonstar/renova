@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from apps.views import SiteView
+
 urlpatterns = [
-    path('accounts/', include('allauth.urls')), path('admin/', admin.site.urls)
+    path('', SiteView.as_view(), name='site_home'),
+    path('accounts/', include('allauth.urls')),
+    path('admin/', admin.site.urls)
 ]

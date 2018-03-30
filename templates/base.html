@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
-  </head>
-  <body>
-    {% block content %}{% endblock %}
-  </body>
+<head>
+<title>{% block title_override %}{% block title %}{% endblock %} &middot; Renova{% endblock %}</title>
+<meta charset="utf-8">
+<meta name="google" value="notranslate">
+</head>
+<body id="renova" data-path="{{ request.path }}">
+{% block content %}{% endblock %}
+</body>
 </html>
