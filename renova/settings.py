@@ -47,6 +47,7 @@ class Base(Configuration):
         'allauth.account',
         'allauth.socialaccount',
         'allauth.socialaccount.providers.twitch',
+        'compressor',
         'apps.authentication',
         'apps.players',
         'apps.ragnarok',
@@ -81,6 +82,8 @@ class Base(Configuration):
     ]
 
     WSGI_APPLICATION = 'renova.wsgi.application'
+
+    SITE_ID = 1
 
     # Database
     # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -139,9 +142,20 @@ class Base(Configuration):
     # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
     STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
+    STATICFILES_FINDERS = [
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'compressor.finders.CompressorFinder',
+    ]
 
-    SITE_ID = 1
-
+    COMPRESS_OFFLINE = True
+    COMPRESS_PRECOMPILERS = (
+        ('text/x-scss', 'django_libsass.SassCompiler'),
+    )
 
 class Development(Base):
     DEBUG = values.BooleanValue(True)
