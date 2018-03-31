@@ -6,7 +6,12 @@
 <meta name="google" value="notranslate">
 {% include "partials/assets.html" %}
 </head>
-<body id="renova" data-path="{{ request.path }}">
-{% block content %}{% endblock %}
+<body id="renova" class="path-{% firstof request.path|slugify "root" %}" data-path="{{ request.path }}">
+{% block body %}
+<div class="page">
+{% block page %}
+{% endblock %}
+</div>
+{% endblock body %}
 </body>
 </html>

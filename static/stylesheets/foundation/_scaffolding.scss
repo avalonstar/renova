@@ -1,6 +1,21 @@
 @import "normalize";
+@import "variables";
 
 *, *:before, *:after {
     box-sizing: border-box;
     text-rendering: optimizeLegibility;
+}
+
+body {
+  font-feature-settings: 'liga', 'kern';
+}
+
+h1, h2, h3 {
+  font-feature-settings: "dlig";
+}
+
+p {
+  line-height: 1.2rem;
+  margin-bottom: 0;
+  margin-top: 1.2rem;
 }

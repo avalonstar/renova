@@ -1,0 +1,24 @@
+{% extends "account/base.html" %}
+{% load account socialaccount %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<h2>Sign In</h2>
+{% get_providers as socialaccount_providers %}
+<p>
+  <strong>Welcome (or welcome back) to Renova</strong>.
+  Sign in or sign up using your Twitch account to get in on the action!
+</p>
+<ul class="account-providers">
+{% for provider in socialaccount_providers %}
+  <li>
+    <a title="{{provider.name}}" class="account-provider {{provider.id}}"
+       href="{% provider_login_url provider.id process="login" scope=scope auth_params=auth_params %}">
+      Connect with {{provider.name}}
+    </a>
+  </li>
+{% endfor %}
+</ul>
+{% include "socialaccount/snippets/login_extra.html" %}
+{% endblock %}
