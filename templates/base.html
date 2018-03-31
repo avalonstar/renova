@@ -4,6 +4,7 @@
 <title>{% block title_override %}{% block title %}{% endblock %} &middot; Renova{% endblock %}</title>
 <meta charset="utf-8">
 <meta name="google" value="notranslate">
+{% include "partials/assets.html" %}
 </head>
 <body id="renova" data-path="{{ request.path }}">
 {% block content %}{% endblock %}
