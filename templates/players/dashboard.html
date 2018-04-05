@@ -1,6 +1,13 @@
-{% extends "base.html" %}
+{% extends "layouts/control_panel_base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block class %}cp dashboard{% endblock %}
 
 {% block content %}
-{{ user }}
-{{ user.accounts }}
+{% for account in user.accounts %}
+  Account ID {{ account.account_id }}
+  Login Count {{ account.logincount }}
+  Last Login {{ account.lastlogin }}
+  Last Used IP {{ account.last_ip }}
+{% endfor %}
 {% endblock content %}

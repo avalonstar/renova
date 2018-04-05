@@ -6,7 +6,11 @@
 <meta name="google" value="notranslate">
 {% include "partials/assets.html" %}
 </head>
-<body id="renova" class="path-{% firstof request.path|slugify "root" %}" data-path="{{ request.path }}">
+<body
+  id="renova"
+  class="path-{% firstof request.path|slugify "root" %} {% block class %}{% endblock %}"
+  data-path="{{ request.path }}"
+>
 {% block body %}
 <div class="page">
 {% block page %}

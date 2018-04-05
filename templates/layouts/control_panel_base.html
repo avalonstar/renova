@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block page %}
+<header class="container" role="banner">
+  <div class="header">
+    <h1 class="header-brand"><a class="logotype" href="{% url "site_home" %}">Renova</a></h1>
+    <div class="header-user">
+      {{ request.user }}
+    </div>
+    <div class="header-actions">
+      <a href="{% url 'account_logout' %}"><i class="fe fe-log-out"></i></a>
+    </div>
+  </div>
+</header>
+<nav class="container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link" href=""><i class="fe fe-layout"></i> Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href=""><i class="fe fe-users"></i> Characters</a></li>
+    <li class="nav-item"><a class="nav-link" href=""><i class="fe fe-box"></i> Storage</a></li>
+  </ul>
+</nav>
+<main class="container" role="main">
+  <div class="content">
+    {% block content %}{% endblock content %}
+  </div>
+</main>
+{% endblock %}

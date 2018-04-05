@@ -1,0 +1,55 @@
+.cp > .page {
+  display: grid;
+  grid-template-rows: auto auto auto;
+}
+
+.cp .container {
+  display: grid;
+  grid-template-columns: auto 1280px auto;
+}
+
+
+.cp header {
+  background: #cd163f;
+}
+
+.cp .nav-tabs .nav-item + .nav-item {
+  margin-left: 1.5rem;
+}
+
+.cp nav {
+  border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+  color: #9aa0ac;
+}
+
+.header {
+  padding: 1rem 0;
+  align-items: center;
+}
+
+.header-brand {
+  margin-bottom: 0;
+
+  .logotype {
+    width: 96px; height: 40px;
+  }
+}
+
+.header-user {
+  margin-left: auto;
+}
+
+.cp .header {
+  grid-column: 2;
+  display: flex;
+
+  color: #fff;
+}
+
+.cp .nav {
+  grid-column: 2;
+}
+
+main.container > .content {
+  grid-column: 2;
+}
