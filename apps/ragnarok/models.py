@@ -22,8 +22,8 @@ class Account(models.Model):
     objects = AccountManager()
 
     class Meta:
-        ordering = ['account_id']
         db_table = 'login'
+        ordering = ['account_id']
 
     def __str__(self):
         return self.username
@@ -100,9 +100,48 @@ class Character(models.Model):
     objects = CharacterManager()
 
     class Meta:
-        ordering = ['account_id']
-        managed = False
         db_table = 'char'
+        managed = False
+        ordering = ['account_id']
 
     def __str__(self):
         return self.name
+
+
+class Storage(models.Model):
+    account = models.ForeignKey(
+        Account, on_delete=models.PROTECT, db_column='account_id'
+    )
+    nameid = models.PositiveSmallIntegerField()
+    amount = models.PositiveSmallIntegerField()
+    equip = models.PositiveIntegerField()
+    identify = models.PositiveSmallIntegerField()
+    refine = models.PositiveIntegerField()
+    attribute = models.PositiveIntegerField()
+    card0 = models.PositiveSmallIntegerField()
+    card1 = models.PositiveSmallIntegerField()
+    card2 = models.PositiveSmallIntegerField()
+    card3 = models.PositiveSmallIntegerField()
+    option_id0 = models.SmallIntegerField()
+    option_val0 = models.SmallIntegerField()
+    option_parm0 = models.IntegerField()
+    option_id1 = models.SmallIntegerField()
+    option_val1 = models.SmallIntegerField()
+    option_parm1 = models.IntegerField()
+    option_id2 = models.SmallIntegerField()
+    option_val2 = models.SmallIntegerField()
+    option_parm2 = models.IntegerField()
+    option_id3 = models.SmallIntegerField()
+    option_val3 = models.SmallIntegerField()
+    option_parm3 = models.IntegerField()
+    option_id4 = models.SmallIntegerField()
+    option_val4 = models.SmallIntegerField()
+    option_parm4 = models.IntegerField()
+    expire_time = models.PositiveIntegerField()
+    bound = models.PositiveIntegerField()
+    unique_id = models.BigIntegerField()
+
+    class Meta:
+        db_table = 'storage'
+        managed = False
+        ordering = ['account_id']
