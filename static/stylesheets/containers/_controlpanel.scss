@@ -2,11 +2,13 @@
   display: grid;
   grid-template-rows: auto auto 1fr auto;
   min-height: 100vh;
+
+  color: #32353d;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: auto 1280px auto;
+  grid-template-columns: auto 960px auto;
 }
 
 .container {
@@ -46,8 +48,8 @@ header {
 }
 
 nav {
-  border-bottom: 1px solid rgba(0, 40, 100, 0.12);
-  color: #9aa0ac;
+  border-bottom: 1px solid #e4e6ec;
+  color: #636675;
 }
 
 .header-brand {
@@ -76,7 +78,7 @@ nav {
 .footer {
   padding: 1.25rem 0;
 
-  border-top: 1px solid rgba(0, 40, 100, 0.12);
-  color: #9aa0ac;
+  border-top: 1px solid #e4e6ec;
+  color: #C5C8D9;
   font-size: 0.85rem;
 }
