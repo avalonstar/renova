@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<h1>Dashboard</h1> 
+<h1>Dashboard</h1>
 {% for account in user.accounts %}
   Account ID {{ account.account_id }}
   Login Count {{ account.logincount }}
@@ -13,12 +13,20 @@
   Last Used IP {{ account.last_ip }}
 {% endfor %}
 
+<table>
 {% for character in user.characters %}
-  {{ character }}
+  <tr>
+    <td>{{ character }}</td>
+  </tr>
 {% endfor %}
+</table>
 
-{% for storage in user.storage %}
-  {{ storage }}
-  {{ storage.nameid }} {{ storage.amount }}
-{% endfor %}
+<table>
+  {% for storage in user.storage %}
+  <tr>
+      <td>{{ storage.item }}</td>
+      <td>&times;{{ storage.amount }}</td>
+  </tr>
+  {% endfor %}
+</table>
 {% endblock content %}
