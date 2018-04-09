@@ -20,6 +20,10 @@ class Player(AbstractUser):
     def characters(self):
         return Character.objects.filter(account_id__in=self.account_ids)
 
+    @property
+    def has_account(self):
+        return self.accounts.exists()
+
     @cached_property
     def storage(self):
         return Storage.objects.filter(account_id__in=self.account_ids)
