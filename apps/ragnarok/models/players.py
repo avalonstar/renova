@@ -1,6 +1,8 @@
 from django.db import models
 
-from .managers import AccountManager, CharacterManager
+from .items import Item
+
+from ..managers import AccountManager, CharacterManager
 
 
 class Account(models.Model):
@@ -27,6 +29,45 @@ class Account(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class Storage(models.Model):
+    account = models.ForeignKey(
+        Account, on_delete=models.PROTECT, db_column='account_id'
+    )
+    item = models.ForeignKey(Item, on_delete=models.PROTECT, db_column='nameid')
+    amount = models.PositiveSmallIntegerField()
+    equip = models.PositiveIntegerField()
+    identify = models.PositiveSmallIntegerField()
+    refine = models.PositiveIntegerField()
+    attribute = models.PositiveIntegerField()
+    card0 = models.PositiveSmallIntegerField()
+    card1 = models.PositiveSmallIntegerField()
+    card2 = models.PositiveSmallIntegerField()
+    card3 = models.PositiveSmallIntegerField()
+    option_id0 = models.SmallIntegerField()
+    option_val0 = models.SmallIntegerField()
+    option_parm0 = models.IntegerField()
+    option_id1 = models.SmallIntegerField()
+    option_val1 = models.SmallIntegerField()
+    option_parm1 = models.IntegerField()
+    option_id2 = models.SmallIntegerField()
+    option_val2 = models.SmallIntegerField()
+    option_parm2 = models.IntegerField()
+    option_id3 = models.SmallIntegerField()
+    option_val3 = models.SmallIntegerField()
+    option_parm3 = models.IntegerField()
+    option_id4 = models.SmallIntegerField()
+    option_val4 = models.SmallIntegerField()
+    option_parm4 = models.IntegerField()
+    expire_time = models.PositiveIntegerField()
+    bound = models.PositiveIntegerField()
+    unique_id = models.BigIntegerField()
+
+    class Meta:
+        db_table = 'storage'
+        managed = False
+        ordering = ['account_id']
 
 
 class Character(models.Model):
@@ -108,14 +149,14 @@ class Character(models.Model):
         return self.name
 
 
-class Storage(models.Model):
-    account = models.ForeignKey(
-        Account, on_delete=models.PROTECT, db_column='account_id'
+class Inventory(models.Model):
+    character = models.ForeignKey(
+        Character, on_delete=models.PROTECT, db_column='char_id'
     )
-    nameid = models.PositiveSmallIntegerField()
-    amount = models.PositiveSmallIntegerField()
+    item = models.ForeignKey(Item, on_delete=models.PROTECT, db_column='nameid')
+    amount = models.PositiveIntegerField()
     equip = models.PositiveIntegerField()
-    identify = models.PositiveSmallIntegerField()
+    identify = models.SmallIntegerField()
     refine = models.PositiveIntegerField()
     attribute = models.PositiveIntegerField()
     card0 = models.PositiveSmallIntegerField()
@@ -138,10 +179,27 @@ class Storage(models.Model):
     option_val4 = models.SmallIntegerField()
     option_parm4 = models.IntegerField()
     expire_time = models.PositiveIntegerField()
+    favorite = models.PositiveIntegerField()
     bound = models.PositiveIntegerField()
     unique_id = models.BigIntegerField()
 
     class Meta:
-        db_table = 'storage'
         managed = False
-        ordering = ['account_id']
+        db_table = 'inventory'
+        ordering = ['character']
+        verbose_name_plural = 'inventories'
+
+
+class Memo(models.Model):
+    memo_id = models.AutoField(primary_key=True)
+    character = models.ForeignKey(
+        Character, on_delete=models.PROTECT, db_column='char_id'
+    )
+    map = models.CharField(max_length=11)
+    x = models.PositiveSmallIntegerField()
+    y = models.PositiveSmallIntegerField()
+
+    class Meta:
+        db_table = 'memo'
+        managed = False
+        ordering = ['character']
