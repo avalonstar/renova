@@ -15,4 +15,7 @@ body {
 }
 
 @import "containers/account";
-@import "containers/controlpanel";
+
+.cp {
+  @import "containers/controlpanel";
+}

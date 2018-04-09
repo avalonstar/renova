@@ -4,10 +4,21 @@
 {% block class %}cp dashboard{% endblock %}
 
 {% block content %}
+
+<h1>Dashboard</h1> 
 {% for account in user.accounts %}
   Account ID {{ account.account_id }}
   Login Count {{ account.logincount }}
   Last Login {{ account.lastlogin }}
   Last Used IP {{ account.last_ip }}
+{% endfor %}
+
+{% for character in user.characters %}
+  {{ character }}
+{% endfor %}
+
+{% for storage in user.storage %}
+  {{ storage }}
+  {{ storage.nameid }} {{ storage.amount }}
 {% endfor %}
 {% endblock content %}
