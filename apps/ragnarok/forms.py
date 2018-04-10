@@ -28,9 +28,15 @@ class AccountCreationForm(forms.ModelForm):
 
     def save(self):
         data = self.cleaned_data
+<<<<<<< HEAD
         account, created = Account.objects.get_or_create(
             username=data['username'],
             password=hashlib.md5(data['password'].encode('utf-8')).hexdigest(),
+=======
+        password = hashlib.md5(data.password.encode('utf-8')).hexdigest()
+        account, created = Account.objects.get_or_create(
+            username=data['username'], password=password
+>>>>>>> First pass at a game account creation form.
         )
 
         if created:
@@ -38,7 +44,11 @@ class AccountCreationForm(forms.ModelForm):
 
             # Save the `account_id` to the player's user account.
             player = Player.objects.get(username=data['username'])
+<<<<<<< HEAD
             player.account_ids = [account.pk]
+=======
+            player.account_ids = account.pk
+>>>>>>> First pass at a game account creation form.
             player.save()
 
         return account
