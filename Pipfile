@@ -22,6 +22,7 @@ django-model-utils = "*"
 [dev-packages]
 
 pytest-django = "*"
+factory-boy = "*"
 
 
 [requires]
