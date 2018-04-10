@@ -1,25 +1,31 @@
 from django.db import models
 
+from model_utils import Choices
+
 from .items import Item
 
 from ..managers import AccountManager, CharacterManager
 
 
 class Account(models.Model):
-    account_id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=23, db_column='userid')
-    password = models.CharField(max_length=32, db_column='user_pass')
-    sex = models.CharField(max_length=1)
+    GENDERS = Choices(('M', 'male', 'Male'), ('F', 'female', 'Female'))
+
+    account_id = models.AutoField(primary_key=True, default=2000000)
+    username = models.CharField(db_column='userid', max_length=23)
+    password = models.CharField(db_column='user_pass', max_length=32)
+    gender = models.CharField(
+        db_column='sex', choices=GENDERS, default=GENDERS.male, max_length=1
+    )
     email = models.CharField(max_length=39)
-    group_id = models.IntegerField()
-    state = models.PositiveIntegerField()
-    unban_time = models.PositiveIntegerField()
-    expiration_time = models.PositiveIntegerField()
-    logincount = models.PositiveIntegerField()
+    group_id = models.IntegerField(default=0)
+    state = models.PositiveIntegerField(default=0)
+    unban_time = models.PositiveIntegerField(default=0)
+    expiration_time = models.PositiveIntegerField(default=0)
+    logincount = models.PositiveIntegerField(default=0)
     lastlogin = models.DateTimeField(blank=True, null=True)
-    last_ip = models.CharField(max_length=100)
+    last_ip = models.CharField(max_length=100, default='')
     birthdate = models.DateField(blank=True, null=True)
-    character_slots = models.PositiveIntegerField()
+    character_slots = models.PositiveIntegerField(default=0)
 
     objects = AccountManager()
 

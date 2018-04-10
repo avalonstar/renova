@@ -28,9 +28,9 @@ class AccountCreationForm(forms.ModelForm):
 
     def save(self):
         data = self.cleaned_data
-        password = hashlib.md5(data.password.encode('utf-8')).hexdigest()
         account, created = Account.objects.get_or_create(
-            username=data['username'], password=password
+            username=data['username'],
+            password=hashlib.md5(data['password'].encode('utf-8')).hexdigest(),
         )
 
         if created:
@@ -38,7 +38,7 @@ class AccountCreationForm(forms.ModelForm):
 
             # Save the `account_id` to the player's user account.
             player = Player.objects.get(username=data['username'])
-            player.account_ids = account.pk
+            player.account_ids = [account.pk]
             player.save()
 
         return account
