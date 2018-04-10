@@ -1,3 +1,5 @@
+import os
+
 from configurations import values
 
 from .base import Base as Settings
