@@ -5,13 +5,17 @@ services: postgresql
 cache:
   directories:
     - ~/.cache/pip
-install:
+before_install:
   - pip install --upgrade pip
+  - pip install python-coveralls pytest-cov
   - pip install pipenv
+install:
   - pipenv install --dev --skip-lock
 before_script:
   - psql -c "CREATE DATABASE travisdb;" -U postgres
 script:
   - pipenv run pytest tests
+after_success:
+  - coveralls
 notifications:
   email: false

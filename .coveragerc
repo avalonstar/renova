@@ -1,0 +1,8 @@
+[run]
+branch = true
+omit = */python?.?/*, *__init__*, */migrations/*, */tests/*, */settings/*, */urls.py, */wsgi.py, manage.py
+source = .
+
+[report]
+exclude_lines =
+    pragma: no cover
