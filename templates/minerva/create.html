@@ -1,0 +1,8 @@
+<form class="" action="{% url 'account_create' %}" method="post">
+  {{ request.user.username }}
+  {{ request.user.email }}
+
+  {% csrf_token %}
+  {{ form.as_ul }}
+  <button type="submit" name="submit" />Create Game Account</button>
+</form>
