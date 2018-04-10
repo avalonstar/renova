@@ -1,25 +1,26 @@
 import os
 
+import dj_database_url
+
 from configurations import values
 
 from .base import Base as Settings
 
 
 class Testing(Settings):
+    # Debug Settings.
+    # --------------------------------------------------------------------------
     DEBUG = values.BooleanValue(False)
     TEMPLATE_DEBUG = DEBUG
 
+    # Database Definition.
+    # --------------------------------------------------------------------------
     if 'TRAVIS' in os.environ:
-        TRAVIS_ENVIRONMENT = True
-
-    if TRAVIS_ENVIRONMENT:
-        Settings.DATABASES['default']['NAME'] = 'travisdb'
-        Settings.DATABASES['default']['USER'] = 'postgres'
-        Settings.DATABASES['default']['PASSWORD'] = ''
-        Settings.DATABASES['default']['PORT'] = ''
+        TEST_DATABASE_URL = 'postgres://postgres@localhost/travisdb'
     else:
-        Settings.DATABASES['default']['NAME'] = 'test_renova'
+        TEST_DATABASE_URL = 'postgres://avalonstar@localhost:5432/test_renova'
 
-    Settings.DATABASES['ragnarok'] = {
-        'ENGINE': 'django.db.backends.sqlite3', 'NAME': ':memory:'
+    DATABASES = {
+        'default': dj_database_url.parse(TEST_DATABASE_URL),
+        'ragnarok': dj_database_url.parse('sqlite://:memory:')
     }
