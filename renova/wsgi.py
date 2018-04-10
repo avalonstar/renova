@@ -15,6 +15,6 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'renova.settings')
-os.environ.setdefault('DJANGO_CONFIGURATION', 'Development')
+os.environ.setdefault('DJANGO_CONFIGURATION', 'Production')
 
 application = get_wsgi_application()
