@@ -13,9 +13,10 @@ class Testing(Settings):
         TRAVIS_ENVIRONMENT = True
 
     if TRAVIS_ENVIRONMENT:
-        Settings.DATABASES['default'] = {
-            'NAME': 'travisdb', 'USER': 'postgres', 'PASSWORD': '', 'PORT': ''
-        }
+        Settings.DATABASES['default']['NAME'] = 'travisdb'
+        Settings.DATABASES['default']['USER'] = 'postgres'
+        Settings.DATABASES['default']['PASSWORD'] = ''
+        Settings.DATABASES['default']['PORT'] = ''
     else:
         Settings.DATABASES['default']['NAME'] = 'test_renova'
 
