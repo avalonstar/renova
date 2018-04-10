@@ -20,6 +20,7 @@ django-libsass = "*"
 
 [dev-packages]
 
+pytest-django = "*"
 
 
 [requires]
