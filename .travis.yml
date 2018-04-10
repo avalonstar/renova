@@ -1,7 +1,14 @@
 language: python
+services: postgresql
+cache:
+  directories:
+    - ~/.cache/pip
 install:
-  - pip install -e .
+  - pip install --upgrade pip
+  - pip install pipenv
   - pipenv install --dev --skip-lock
+before_script:
+  - psql -c "CREATE DATABASE travisdb;" -U postgres
 script:
   - pipenv run pytest tests
 notifications:
