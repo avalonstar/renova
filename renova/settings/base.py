@@ -8,7 +8,7 @@ from configurations import Configuration, values
 class Base(Configuration):
     # Path Configuration.
     # --------------------------------------------------------------------------
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
     # Debug Settings.
     # SECURITY WARNING: Don't run with debug turned on in production!
