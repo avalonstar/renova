@@ -17,6 +17,7 @@ django-configurations = "*"
 django-compressor = "*"
 django-libsass = "*"
 django-model-utils = "*"
+djangorestframework = "*"
 
 
 [dev-packages]
