@@ -18,6 +18,8 @@ django-compressor = "*"
 django-libsass = "*"
 django-model-utils = "*"
 djangorestframework = "*"
+django-cors-headers = "*"
+django-rest-auth = "*"
 
 
 [dev-packages]

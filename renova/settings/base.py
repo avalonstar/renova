@@ -35,7 +35,10 @@ class Base(Configuration):
         'allauth.socialaccount',
         'allauth.socialaccount.providers.twitch',
         'compressor',
+        'corsheaders',
         'rest_framework',
+        'rest_framework.authtoken',
+        'rest_auth',
     ]
     ADMINISTRATION = ['django.contrib.admin']
     INSTALLED_APPS = DJANGO + COMPONENTS + PLUGINS + ADMINISTRATION
@@ -43,6 +46,7 @@ class Base(Configuration):
     # Middleware Definition.
     # --------------------------------------------------------------------------
     MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
