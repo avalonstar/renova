@@ -35,6 +35,7 @@ class Base(Configuration):
         'allauth.socialaccount',
         'allauth.socialaccount.providers.twitch',
         'compressor',
+        'rest_framework',
     ]
     ADMINISTRATION = ['django.contrib.admin']
     INSTALLED_APPS = DJANGO + COMPONENTS + PLUGINS + ADMINISTRATION

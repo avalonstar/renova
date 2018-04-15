@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from rest_framework import routers
+
 from apps.views import SiteView
+from apps.players.views import PlayerViewSet
 from apps.ragnarok.views import AccountCreationView
 
+router = routers.DefaultRouter()
+router.register('players', PlayerViewSet)
 
 urlpatterns = [
     path('', SiteView.as_view(), name='site_home'),
@@ -30,4 +35,5 @@ urlpatterns = [
     ),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]
