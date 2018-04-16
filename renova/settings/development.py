@@ -8,7 +8,7 @@ class Development(Settings):
     # --------------------------------------------------------------------------
     DEBUG = values.BooleanValue(True)
 
-    CORS_ORIGIN_WHITELIST = (
-        'localhost:3000',
-        'localhost:3001',
+    CORS_ORIGIN_REGEX_WHITELIST = (
+        r'^(https?://)?localhost',
+        r'^(https?://)?127.',
     )
