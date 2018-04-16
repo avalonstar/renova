@@ -3,7 +3,11 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 
+from rest_framework import viewsets
+
 from .forms import AccountCreationForm
+from .models import Item
+from .serializers import ItemSerializer
 
 
 class AccountCreationView(LoginRequiredMixin, FormView):
@@ -18,3 +22,8 @@ class AccountCreationView(LoginRequiredMixin, FormView):
         kwargs = super(AccountCreationView, self).get_form_kwargs()
         kwargs['instance'] = self.request.user
         return kwargs
+
+
+class ItemViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer

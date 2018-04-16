@@ -20,10 +20,11 @@ from rest_framework import routers
 
 from apps.views import SiteView
 from apps.players.views import PlayerViewSet
-from apps.ragnarok.views import AccountCreationView
+from apps.ragnarok.views import AccountCreationView, ItemViewSet
 
 router = routers.DefaultRouter()
 router.register('players', PlayerViewSet)
+router.register('items', ItemViewSet)
 
 urlpatterns = [
     path('', SiteView.as_view(), name='site_home'),
