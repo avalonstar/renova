@@ -1,5 +1,9 @@
 import { injectGlobal } from 'styled-components';
 
-export const foundation = {}
+import reboot from './reboot';
 
-export default () => injectGlobal``
+export const foundation = {};
+
+export default () => injectGlobal`
+  ${reboot}
+`;
