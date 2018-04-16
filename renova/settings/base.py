@@ -163,3 +163,14 @@ class Base(Configuration):
     ALLOWED_HOSTS = []
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     SITE_ID = 1
+
+    # Django REST Framework (and related authentication).
+    # --------------------------------------------------------------------------
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.TokenAuthentication',
+        ),
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
+        'PAGE_SIZE': 100
+    }
+    REST_USE_JWT = True

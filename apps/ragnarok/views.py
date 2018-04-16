@@ -1,9 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 
-from rest_framework import viewsets
+from rest_framework import filters, viewsets
 
 from .forms import AccountCreationForm
 from .models import Item
@@ -27,3 +26,6 @@ class AccountCreationView(LoginRequiredMixin, FormView):
 class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('pk', 'name')
+    ordering = ('pk',)
