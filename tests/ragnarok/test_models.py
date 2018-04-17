@@ -19,3 +19,11 @@ class TestItems:
         assert on_assassin.equippable_jobs == ['Assassin']
         assert on_all.equippable_jobs == ['All Jobs']
         assert on_all_no_novice.equippable_jobs == ['All Jobs (Except Novice)']
+
+    def test_equippable_classes(self):
+        on_all = ItemFactory(equip_classes=63)
+        on_trascendents = ItemFactory(equip_classes=18)
+        assert on_all.equippable_classes == ['All Classes']
+        assert on_trascendents.equippable_classes == [
+            'Trascendent Classes', 'Transcendent Third Classes'
+        ]

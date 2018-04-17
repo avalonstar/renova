@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from ..utils import EQUIPPABLE_JOBS
+from ..utils import EQUIPPABLE_CLASSES, EQUIPPABLE_JOBS
 
 
 class Item(models.Model):
@@ -62,3 +62,16 @@ class Item(models.Model):
             return ['All Jobs (Except Novice)']
 
         return jobs
+
+    @property
+    def equippable_classes(self):
+        classes = [
+            name
+            for bit, name in EQUIPPABLE_CLASSES.items()
+            if (self.equip_classes & bit)
+        ]
+
+        if len(classes) == len(EQUIPPABLE_CLASSES):
+            return ['All Classes']
+
+        return classes

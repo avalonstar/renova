@@ -32,3 +32,13 @@ EQUIPPABLE_JOBS = {
     pow(2, 30): 'Rebellion',
     pow(2, 31): 'Summoner',
 }
+
+EQUIPPABLE_CLASSES = {
+    pow(2, 0): 'Normal Classes',
+    pow(2, 1): 'Trascendent Classes',
+    pow(2, 2): 'Baby Classes',
+    pow(2, 3): 'Third Classes',
+    pow(2, 4): 'Transcendent Third Classes',
+    pow(2, 5): 'Baby Third Classes',
+}
+
