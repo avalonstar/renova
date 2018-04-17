@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.db import models
 
-from ..utils import BOOLEAN, EQUIPPABLE_CLASSES, EQUIPPABLE_GENDERS, EQUIPPABLE_JOBS
+from ..utils import (
+    BOOLEAN, EQUIPPABLE_CLASSES, EQUIPPABLE_GENDERS, EQUIPPABLE_JOBS, ITEM_TYPE
+)
 
 
 class Item(models.Model):
@@ -12,7 +14,7 @@ class Item(models.Model):
     name = models.CharField(
         db_column='name_japanese', max_length=50, default=''
     )
-    type = models.PositiveIntegerField(default=0)
+    type = models.PositiveIntegerField(default=0, choices=ITEM_TYPE)
     price_buy = models.PositiveIntegerField(blank=True, null=True)
     price_sell = models.PositiveIntegerField(blank=True, null=True)
     weight = models.PositiveSmallIntegerField(default=0)

@@ -3,6 +3,21 @@ from model_utils import Choices
 
 BOOLEAN = Choices((0, 'no', 'No'), (1, 'yes', 'Yes'))
 
+ITEM_TYPE = Choices(
+    (0, 'healing', 'Healing'),
+    (2, 'consumable', 'Consumable'),
+    (3, 'miscellaneous', 'Miscellaneous'),
+    (4, 'gear', 'Equippable Gear'),
+    (5, 'weapon', 'Weapon'),
+    (6, 'card', 'Card'),
+    (7, 'petegg', 'Pet Egg'),
+    (8, 'petequipment', 'Pet Equipment'),
+    (10, 'ammo', 'Ammunition'),
+    (11, 'consumabledelayed', 'Consumable (Delayed)'),
+    (12, 'shadowgear', 'Shadow Equipment'),
+    (18, 'consumableconfirm', 'Consumable (Requires Confirmation)')
+)
+
 EQUIPPABLE_JOBS = {
     pow(2, 0): 'Novice',
     pow(2, 1): 'Swordman',
