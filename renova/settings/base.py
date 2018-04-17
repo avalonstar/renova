@@ -16,6 +16,7 @@ class Base(Configuration):
     # SECURITY WARNING: Don't run with debug turned on in production!
     # --------------------------------------------------------------------------
     DEBUG = values.BooleanValue(True)
+    TESTING = values.BooleanValue(False)
 
     # Application Definition.
     # --------------------------------------------------------------------------

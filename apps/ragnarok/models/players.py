@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from model_utils import Choices
@@ -74,7 +75,7 @@ class Storage(models.Model):
 
     class Meta:
         db_table = 'storage'
-        managed = False
+        managed = settings.TESTING
         ordering = ['account_id']
 
 
@@ -150,7 +151,7 @@ class Character(models.Model):
 
     class Meta:
         db_table = 'char'
-        managed = False
+        managed = settings.TESTING
         ordering = ['account_id']
 
     def __str__(self):
@@ -194,8 +195,8 @@ class Inventory(models.Model):
     unique_id = models.BigIntegerField()
 
     class Meta:
-        managed = False
         db_table = 'inventory'
+        managed = settings.TESTING
         ordering = ['character']
         verbose_name_plural = 'inventories'
 
@@ -211,5 +212,5 @@ class Memo(models.Model):
 
     class Meta:
         db_table = 'memo'
-        managed = False
+        managed = settings.TESTING
         ordering = ['character']

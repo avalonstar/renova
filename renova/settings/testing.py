@@ -10,6 +10,7 @@ from .base import Base as Settings
 class Testing(Settings):
     # Debug Settings.
     # --------------------------------------------------------------------------
+    TESTING = values.BooleanValue(True)
     DEBUG = values.BooleanValue(False)
     TEMPLATE_DEBUG = DEBUG
 

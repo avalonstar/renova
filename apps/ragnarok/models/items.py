@@ -38,7 +38,7 @@ class Item(models.Model):
 
     class Meta:
         db_table = 'item_db_re'
-        managed = False
+        managed = settings.TESTING
         ordering = ['id']
 
     def __str__(self):
