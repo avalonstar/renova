@@ -1,18 +1,19 @@
+from django.conf import settings
 from django.db import models
 
 from ..utils import EQUIPPABLE_JOBS
 
 
 class Item(models.Model):
-    id = models.PositiveSmallIntegerField(primary_key=True)
+    id = models.PositiveSmallIntegerField(primary_key=True, default=0)
     aegis_name = models.CharField(
-        db_column='name_english', unique=True, max_length=50
+        db_column='name_english', unique=True, max_length=50, default=''
     )
-    name = models.CharField(db_column='name_japanese', max_length=50)
-    type = models.PositiveIntegerField()
+    name = models.CharField(db_column='name_japanese', max_length=50, default='')
+    type = models.PositiveIntegerField(default=0)
     price_buy = models.PositiveIntegerField(blank=True, null=True)
     price_sell = models.PositiveIntegerField(blank=True, null=True)
-    weight = models.PositiveSmallIntegerField()
+    weight = models.PositiveSmallIntegerField(default=0)
 
     atk_matk = models.CharField(
         db_column='atk:matk', max_length=11, blank=True, null=True
@@ -51,4 +52,9 @@ class Item(models.Model):
             for bit, name in EQUIPPABLE_JOBS.items()
             if (self.equip_jobs & bit)
         ]
+
+        if len(jobs) == len(EQUIPPABLE_JOBS):
+            return ['All Jobs']
+        elif len(jobs) == len(EQUIPPABLE_JOBS) - 1:
+            return ['All Jobs (Except Novice)']
         return jobs
