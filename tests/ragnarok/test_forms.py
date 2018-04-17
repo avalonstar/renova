@@ -38,7 +38,9 @@ def test_account_creation():
     if form.is_valid():
         account = form.save()
         assert account.username == 'bryan'
-        assert account.password == hashlib.md5('testpass'.encode('utf-8')).hexdigest()
+        assert account.password == hashlib.md5(
+            'testpass'.encode('utf-8')
+        ).hexdigest()
 
         player = Player.objects.get(username='bryan')
         assert player.account_ids == [account.pk]

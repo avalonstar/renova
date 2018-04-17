@@ -22,5 +22,5 @@ class Testing(Settings):
 
     DATABASES = {
         'default': dj_database_url.parse(TEST_DATABASE_URL),
-        'ragnarok': dj_database_url.parse('sqlite://:memory:')
+        'ragnarok': dj_database_url.parse('sqlite://:memory:'),
     }

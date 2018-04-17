@@ -8,7 +8,9 @@ from configurations import Configuration, values
 class Base(Configuration):
     # Path Configuration.
     # --------------------------------------------------------------------------
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    BASE_DIR = os.path.dirname(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    )
 
     # Debug Settings.
     # SECURITY WARNING: Don't run with debug turned on in production!
@@ -25,11 +27,7 @@ class Base(Configuration):
         'django.contrib.staticfiles',
         'django.contrib.sites',
     ]
-    COMPONENTS = [
-        'apps.authentication',
-        'apps.players',
-        'apps.ragnarok',
-    ]
+    COMPONENTS = ['apps.authentication', 'apps.players', 'apps.ragnarok']
     PLUGINS = [
         'allauth',
         'allauth.account',
@@ -37,9 +35,7 @@ class Base(Configuration):
         'allauth.socialaccount.providers.twitch',
         'compressor',
     ]
-    ADMINISTRATION = [
-        'django.contrib.admin',
-    ]
+    ADMINISTRATION = ['django.contrib.admin']
     INSTALLED_APPS = DJANGO + COMPONENTS + PLUGINS + ADMINISTRATION
 
     # Middleware Definition.
@@ -63,7 +59,9 @@ class Base(Configuration):
     # --------------------------------------------------------------------------
     DATABASES = {
         'default': dj_database_url.config(conn_max_age=None),
-        'ragnarok': dj_database_url.parse(os.getenv('RAGNAROK_URL'), conn_max_age=None),
+        'ragnarok': dj_database_url.parse(
+            os.getenv('RAGNAROK_URL'), conn_max_age=None
+        ),
     }
     DATABASE_ROUTERS = ['apps.ragnarok.router.RagnarokRouter']
 
@@ -104,9 +102,15 @@ class Base(Configuration):
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
         },
-        {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+        {
+            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
+        },
     ]
 
     # django-allauth
@@ -114,7 +118,9 @@ class Base(Configuration):
     ACCOUNT_ADAPTER = 'apps.authentication.adapters.AccountAdapter'
     SOCIALACCOUNT_ADAPTER = 'apps.authentication.adapters.SocialAccountAdapter'
     SOCIALACCOUNT_EMAIL_VERIFICATION = False
-    SOCIALACCOUNT_PROVIDERS = {'twitch': {'SCOPE': ['user_read', 'user_subscriptions']}}
+    SOCIALACCOUNT_PROVIDERS = {
+        'twitch': {'SCOPE': ['user_read', 'user_subscriptions']}
+    }
 
     # Static Files. (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/2.0/howto/static-files/

@@ -7,7 +7,9 @@ from apps.ragnarok.models import Account, Character, Storage
 
 
 class Player(AbstractUser):
-    account_ids = ArrayField(models.IntegerField(), blank=True, default=list, size=2)
+    account_ids = ArrayField(
+        models.IntegerField(), blank=True, default=list, size=2
+    )
 
     def __str__(self):
         return self.username

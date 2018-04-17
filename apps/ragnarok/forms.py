@@ -14,7 +14,9 @@ class AccountCreationForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['username', 'email']
-        widgets = {'username': forms.HiddenInput(), 'email': forms.HiddenInput()}
+        widgets = {
+            'username': forms.HiddenInput(), 'email': forms.HiddenInput()
+        }
 
     def clean(self):
         cleaned_data = super(AccountCreationForm, self).clean()

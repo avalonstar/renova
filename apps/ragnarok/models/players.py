@@ -41,7 +41,9 @@ class Storage(models.Model):
     account = models.ForeignKey(
         Account, on_delete=models.PROTECT, db_column='account_id'
     )
-    item = models.ForeignKey(Item, on_delete=models.PROTECT, db_column='nameid')
+    item = models.ForeignKey(
+        Item, on_delete=models.PROTECT, db_column='nameid'
+    )
     amount = models.PositiveSmallIntegerField()
     equip = models.PositiveIntegerField()
     identify = models.PositiveSmallIntegerField()
@@ -159,7 +161,9 @@ class Inventory(models.Model):
     character = models.ForeignKey(
         Character, on_delete=models.PROTECT, db_column='char_id'
     )
-    item = models.ForeignKey(Item, on_delete=models.PROTECT, db_column='nameid')
+    item = models.ForeignKey(
+        Item, on_delete=models.PROTECT, db_column='nameid'
+    )
     amount = models.PositiveIntegerField()
     equip = models.PositiveIntegerField()
     identify = models.SmallIntegerField()

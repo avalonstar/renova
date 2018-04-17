@@ -23,7 +23,11 @@ from apps.ragnarok.views import AccountCreationView
 urlpatterns = [
     path('', SiteView.as_view(), name='site_home'),
     path('', include('apps.players.urls')),
-    path('accounts/create/', AccountCreationView.as_view(), name='account_create'),
+    path(
+        'accounts/create/',
+        AccountCreationView.as_view(),
+        name='account_create',
+    ),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
 ]
