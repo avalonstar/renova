@@ -19,6 +19,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from apps.views import SiteView
+from apps.authentication.views import TwitchLogin
 from apps.players.views import PlayerViewSet
 from apps.ragnarok.views import AccountCreationView, ItemViewSet
 
@@ -35,6 +36,12 @@ urlpatterns = [
         name='account_create',
     ),
     path('accounts/', include('allauth.urls')),
-    path('admin/', admin.site.urls),
+
+    # API.
+    path('auth/twitch/', TwitchLogin.as_view(), name='twitch_login'),
+    path('auth/', include('rest_auth.urls')),
     path('api/', include(router.urls)),
+
+    # Administration.
+    path('admin/', admin.site.urls),
 ]
