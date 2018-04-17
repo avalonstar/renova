@@ -9,7 +9,9 @@ class Item(models.Model):
     aegis_name = models.CharField(
         db_column='name_english', unique=True, max_length=50, default=''
     )
-    name = models.CharField(db_column='name_japanese', max_length=50, default='')
+    name = models.CharField(
+        db_column='name_japanese', max_length=50, default=''
+    )
     type = models.PositiveIntegerField(default=0)
     price_buy = models.PositiveIntegerField(blank=True, null=True)
     price_sell = models.PositiveIntegerField(blank=True, null=True)
@@ -55,6 +57,8 @@ class Item(models.Model):
 
         if len(jobs) == len(EQUIPPABLE_JOBS):
             return ['All Jobs']
+
         elif len(jobs) == len(EQUIPPABLE_JOBS) - 1:
             return ['All Jobs (Except Novice)']
+
         return jobs

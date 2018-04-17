@@ -7,6 +7,7 @@ pytestmark = pytest.mark.django_db
 
 
 class TestItems:
+
     def test_factory(self):
         factory = ItemFactory()
         assert isinstance(factory, Item)
