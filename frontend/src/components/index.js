@@ -1,1 +1,2 @@
-export { Footer } from './common';
+export { Footer } from './Common';
+export { Navigation } from './Dashboard';
