@@ -1,3 +1,8 @@
+from model_utils import Choices
+
+
+BOOLEAN = Choices((0, 'no', 'No'), (1, 'yes', 'Yes'))
+
 EQUIPPABLE_JOBS = {
     pow(2, 0): 'Novice',
     pow(2, 1): 'Swordman',
@@ -41,4 +46,8 @@ EQUIPPABLE_CLASSES = {
     pow(2, 4): 'Transcendent Third Classes',
     pow(2, 5): 'Baby Third Classes',
 }
+
+EQUIPPABLE_GENDERS = Choices(
+    (0, 'male', 'Male'), (1, 'female', 'Female'), (2, 'both', 'Both')
+)
 

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from ..utils import EQUIPPABLE_CLASSES, EQUIPPABLE_JOBS
+from ..utils import BOOLEAN, EQUIPPABLE_CLASSES, EQUIPPABLE_GENDERS, EQUIPPABLE_JOBS
 
 
 class Item(models.Model):
@@ -28,11 +28,15 @@ class Item(models.Model):
     equip_classes = models.PositiveIntegerField(
         db_column='equip_upper', blank=True, null=True
     )
-    equip_genders = models.PositiveIntegerField(blank=True, null=True)
+    equip_genders = models.PositiveIntegerField(
+        blank=True, null=True, choices=EQUIPPABLE_GENDERS
+    )
     equip_locations = models.PositiveIntegerField(blank=True, null=True)
     weapon_level = models.PositiveIntegerField(blank=True, null=True)
     equip_level = models.CharField(max_length=10, blank=True, null=True)
-    refineable = models.PositiveIntegerField(blank=True, null=True)
+    refineable = models.PositiveIntegerField(
+        blank=True, null=True, choices=BOOLEAN
+    )
 
     view = models.PositiveSmallIntegerField(blank=True, null=True)
     script = models.TextField(blank=True, null=True)
