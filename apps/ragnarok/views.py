@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 
 from rest_framework import filters, viewsets
+from rest_framework.response import Response
 
 from .forms import AccountCreationForm
 from .models import Item
@@ -29,3 +30,8 @@ class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = ('pk', 'name')
     ordering = ('pk',)
+
+    def list(self, request):
+        queryset = Item.objects.order_by('?')[:10]
+        serializer = ItemSerializer(queryset, many=True)
+        return Response(serializer.data)
