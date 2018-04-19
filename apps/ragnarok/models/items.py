@@ -2,7 +2,12 @@ from django.conf import settings
 from django.db import models
 
 from ..utils import (
-    BOOLEAN, EQUIPPABLE_CLASSES, EQUIPPABLE_GENDERS, EQUIPPABLE_JOBS, ITEM_TYPE
+    BOOLEAN,
+    EQUIPPABLE_CLASSES,
+    EQUIPPABLE_GENDERS,
+    EQUIPPABLE_JOBS,
+    EQUIPPABLE_LOCATIONS,
+    ITEM_TYPE,
 )
 
 
@@ -81,3 +86,11 @@ class Item(models.Model):
             return ['All Classes']
 
         return classes
+
+    @property
+    def equippable_locations(self):
+        return [
+            name
+            for bit, name in EQUIPPABLE_LOCATIONS.items()
+            if (self.equip_locations & bit)
+        ]

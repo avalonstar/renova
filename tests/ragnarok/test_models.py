@@ -27,3 +27,7 @@ class TestItems:
         assert on_trascendents.equippable_classes == [
             'Trascendent Classes', 'Transcendent Third Classes'
         ]
+
+    def test_equippable_locations(self):
+        on_head = ItemFactory(equip_locations=256)
+        assert on_head.equippable_locations == ['Upper Headgear']

@@ -15,7 +15,7 @@ ITEM_TYPE = Choices(
     (10, 'ammo', 'Ammunition'),
     (11, 'consumabledelayed', 'Consumable (Delayed)'),
     (12, 'shadowgear', 'Shadow Equipment'),
-    (18, 'consumableconfirm', 'Consumable (Requires Confirmation)')
+    (18, 'consumableconfirm', 'Consumable (Requires Confirmation)'),
 )
 
 EQUIPPABLE_JOBS = {
@@ -66,3 +66,27 @@ EQUIPPABLE_GENDERS = Choices(
     (0, 'male', 'Male'), (1, 'female', 'Female'), (2, 'both', 'Both')
 )
 
+EQUIPPABLE_LOCATIONS = {
+    pow(0, 1): 'None',
+    pow(2, 8): 'Upper Headgear',
+    pow(2, 9): 'Middle Headgear',
+    pow(2, 0): 'Lower Headgear',
+    pow(2, 4): 'Armor',
+    pow(2, 1): 'Weapon',
+    pow(2, 5): 'Shield',
+    pow(2, 2): 'Garment',
+    pow(2, 6): 'Footgear',
+    pow(2, 3): 'Right Accessory',
+    pow(2, 7): 'Left Accessory',
+    pow(2, 10): 'Costume Upper Headgear',
+    pow(2, 11): 'Costume Middle Headgear',
+    pow(2, 12): 'Costume Lower Headgear',
+    pow(2, 13): 'Costume Garment/Robe',
+    pow(2, 15): 'Ammo',
+    pow(2, 16): 'Shadow Armor',
+    pow(2, 17): 'Shadow Weapon',
+    pow(2, 18): 'Shadow Shield',
+    pow(2, 19): 'Shadow Shoes',
+    pow(2, 20): 'Shadow Right Accessory',
+    pow(2, 21): 'Shadow Left Accessory',
+}
