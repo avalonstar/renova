@@ -5,8 +5,8 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import { ThemeProvider } from 'styled-components';
 
-import App from 'containers/App';
-import { Item, Items } from 'containers/Database';
+import App from 'scenes/App';
+import { Item, Items } from 'scenes/Database';
 import { Dashboard } from 'layouts';
 import baseStyles, { foundation } from 'helpers/foundation';
 import { history } from 'store';
