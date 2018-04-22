@@ -9,9 +9,11 @@ const { itemListFetch, itemFetch } = actions;
 
 function* fetchItem(item) {
   try {
-    const uri = `http://localhost:8000/api/items/${item.pk}`;
+    const uri = `http://localhost:8000/api/items/${item.id}`;
     const response = yield call(axios.get, uri);
-    yield put(itemFetch.success(normalize(response.data, schema.item)));
+    yield put(
+      itemFetch.success(item.id, normalize(response.data, schema.item))
+    );
   } catch (error) {
     yield put(itemFetch.failure(error));
   }

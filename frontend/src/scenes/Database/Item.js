@@ -3,25 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { itemFetch } from 'actions/items';
-import { getItem } from 'reducers';
+
+import * as selectors from './selectors';
 
 const propTypes = {
   request: PropTypes.func.isRequired,
-  pk: PropTypes.number,
+  id: PropTypes.number.isRequired,
   item: PropTypes.object
 };
 
 class Item extends Component {
   componentDidMount() {
-    const { pk } = this.props;
-    this.props.request(pk);
+    const { id } = this.props;
+    this.props.request(id);
   }
 
   render() {
     return (
       <div>
         This is a single item.
-        {JSON.stringify(this.props)}
+        {JSON.stringify(this.props.item)}
       </div>
     );
   }
@@ -30,8 +31,11 @@ class Item extends Component {
 Item.propTypes = propTypes;
 
 const mapStateToProps = (state, { match }) => {
-  const { pk } = match.params;
-  return { item: getItem(state, pk), pk: parseInt(pk, 10) };
+  const { id } = match.params;
+  return {
+    item: selectors.getItem(state, id),
+    id: parseInt(id, 10)
+  };
 };
 
 export default connect(mapStateToProps, { request: itemFetch.request })(Item);

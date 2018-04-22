@@ -5,12 +5,12 @@ export const ITEM_FETCH = createRequestTypes('ITEM_FETCH');
 
 export const itemListFetch = {
   request: () => action(ITEM_LIST_FETCH.REQUEST),
-  success: payload => action(ITEM_LIST_FETCH.SUCCESS, { payload }),
+  success: response => action(ITEM_LIST_FETCH.SUCCESS, { response }),
   failure: error => action(ITEM_LIST_FETCH.FAILURE, { error })
 };
 
 export const itemFetch = {
-  request: pk => action(ITEM_FETCH.REQUEST, { pk }),
-  success: payload => action(ITEM_FETCH.SUCCESS, { payload }),
-  failure: error => action(ITEM_FETCH.FAILURE, { error })
+  request: id => action(ITEM_FETCH.REQUEST, { id }),
+  success: (id, response) => action(ITEM_FETCH.SUCCESS, { id, response }),
+  failure: (id, error) => action(ITEM_FETCH.FAILURE, { id, error })
 };

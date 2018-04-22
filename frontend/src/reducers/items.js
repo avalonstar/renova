@@ -1,18 +1,55 @@
+import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
+
 import * as actions from 'actions/items';
 
-const initialState = {};
+import active from './item';
 
-const items = (state = initialState, action) => {
+const allIds = (state = [], action) => {
+  if (action.response) {
+    return [...action.response.result];
+  }
+  return state;
+};
+
+const byId = (state = {}, action) => {
+  if (action.response) {
+    return {
+      ...state,
+      ...action.response.entities.items
+    };
+  }
+  return state;
+};
+
+const isFetching = (state = false, action) => {
   switch (action.type) {
     case actions.ITEM_LIST_FETCH.REQUEST:
-      return { ...state, isLoading: true };
+      return true;
     case actions.ITEM_LIST_FETCH.SUCCESS:
-      return { ...state, isLoading: false, payload: action.payload };
     case actions.ITEM_LIST_FETCH.FAILURE:
-      return { ...state, isLoading: false, isError: true };
+      return false;
     default:
       return state;
   }
 };
 
+const items = combineReducers({
+  byId,
+  allIds,
+  active,
+  isFetching
+});
+
 export default items;
+
+const getItemsById = state => state.byId;
+const getAllIds = state => state.allIds;
+
+export const getItems = createSelector(
+  [getAllIds, getItemsById],
+  (ids, entities) => ids.map(id => entities[id])
+);
+
+export const getErrorMessage = state => state.error;
+export const getIsFetching = state => state.isFetching;

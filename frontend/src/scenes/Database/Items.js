@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { itemListFetch } from 'actions/items';
-import { getItems } from 'reducers';
+
+import * as selectors from './selectors';
 
 const propTypes = {
-  request: PropTypes.func.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object)
-};
-
-const defaultProps = {
-  items: []
+  request: PropTypes.func.isRequired
 };
 
 class Items extends Component {
@@ -20,27 +17,29 @@ class Items extends Component {
   }
 
   render() {
-    // const { isFetching } = this.props;
-    // if (isFetching && ) {
-    //  return <p>loading...</p>
-    // }
+    const { isFetching, items } = this.props;
+    if (isFetching && items) {
+      return <p>loading...</p>;
+    }
+
     return (
       <div>
-        {/* {this.props.items.map(item => (
+        {items.map(item => (
           <div key={item.id}>
-            <small>{JSON.stringify(item)}</small>
+            <Link to={`/database/item/${item.id}`}>
+              <small>{JSON.stringify(item)}</small>
+            </Link>
           </div>
-        ))} */}
+        ))}
       </div>
     );
   }
 }
 
 Items.propTypes = propTypes;
-Items.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
-  items: getItems(state)
+  items: selectors.getItems(state)
   // isFetching: getIsFetching(state)
 });
 
