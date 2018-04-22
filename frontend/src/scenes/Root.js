@@ -31,7 +31,7 @@ const Database = () => (
     <RouteWithLayout
       layout={Dashboard}
       component={Item}
-      path="/database/items/:pk"
+      path="/database/item/:pk"
     />
   </Switch>
 );
