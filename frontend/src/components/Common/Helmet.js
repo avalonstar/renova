@@ -2,9 +2,7 @@ import React from 'react';
 import { Helmet as HelmetComponent } from 'react-helmet';
 
 const Helmet = () => (
-  <HelmetComponent>
-    <title>Renova</title>
-  </HelmetComponent>
+  <HelmetComponent defaultTitle="Renova" titleTemplate="%s &bull; Renova" />
 );
 
 export default Helmet;
