@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
@@ -6,9 +6,10 @@ import { ConnectedRouter } from 'react-router-redux';
 import { ThemeProvider } from 'styled-components';
 
 import App from 'scenes/App';
+import { Helmet } from 'components/Common';
 import { Item, Items } from 'scenes/Database';
 import { Dashboard } from 'layouts';
-import baseStyles, { foundation } from 'helpers/foundation';
+import { foundation } from 'helpers/foundation';
 import { history } from 'store';
 
 const RouteWithLayout = ({ layout, component, ...rest }) => (
@@ -37,10 +38,13 @@ const Database = () => (
 );
 
 const Main = () => (
-  <Switch>
-    <RouteWithLayout layout={Dashboard} exact path="/" component={App} />
-    <Route path="/database" component={Database} />
-  </Switch>
+  <Fragment>
+    <Helmet />
+    <Switch>
+      <RouteWithLayout layout={Dashboard} exact path="/" component={App} />
+      <Route path="/database" component={Database} />
+    </Switch>
+  </Fragment>
 );
 
 const Root = ({ store }) => (
