@@ -25,6 +25,7 @@ class Base(Configuration):
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
+        'whitenoise.runserver_nostatic',  # This is required to be here.
         'django.contrib.staticfiles',
         'django.contrib.sites',
     ]
@@ -48,6 +49,7 @@ class Base(Configuration):
     MIDDLEWARE = [
         'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
@@ -139,6 +141,7 @@ class Base(Configuration):
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
         'compressor.finders.CompressorFinder',
     ]
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     # django-compressor
     COMPRESS_OFFLINE = True
