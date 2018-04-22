@@ -6,8 +6,8 @@ from rest_framework import filters, viewsets
 from rest_framework.response import Response
 
 from .forms import AccountCreationForm
-from .models import Item
-from .serializers import ItemSerializer
+from .models import Item, Monster
+from .serializers import ItemSerializer, MonsterSerializer
 
 
 class AccountCreationView(LoginRequiredMixin, FormView):
@@ -35,3 +35,11 @@ class ItemViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = Item.objects.order_by('?')[:10]
         serializer = ItemSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class MonsterViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Monster.objects.all()
+    serializer_class = MonsterSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ('pk', 'iname')
+    ordering = ('pk',)

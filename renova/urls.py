@@ -21,11 +21,12 @@ from rest_framework import routers
 from apps.views import ReactView
 from apps.authentication.views import TwitchLogin
 from apps.players.views import PlayerViewSet
-from apps.ragnarok.views import AccountCreationView, ItemViewSet
+from apps.ragnarok.views import AccountCreationView, ItemViewSet, MonsterViewSet
 
 router = routers.DefaultRouter()
 router.register('players', PlayerViewSet)
 router.register('items', ItemViewSet)
+router.register('monsters', MonsterViewSet)
 
 urlpatterns = [
     path('', include('apps.players.urls')),
