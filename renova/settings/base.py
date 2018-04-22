@@ -11,6 +11,7 @@ class Base(Configuration):
     BASE_DIR = os.path.dirname(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     )
+    REACT_DIR = os.path.join(BASE_DIR, 'frontend')
 
     # Debug Settings.
     # SECURITY WARNING: Don't run with debug turned on in production!
@@ -135,7 +136,10 @@ class Base(Configuration):
     # --------------------------------------------------------------------------
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATIC_URL = '/static/'
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+        os.path.join(REACT_DIR, 'build', 'static'),
+    ]
     STATICFILES_FINDERS = [
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',

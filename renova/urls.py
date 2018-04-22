@@ -14,11 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 from rest_framework import routers
 
-from apps.views import SiteView
+from apps.views import ReactView
 from apps.authentication.views import TwitchLogin
 from apps.players.views import PlayerViewSet
 from apps.ragnarok.views import AccountCreationView, ItemViewSet
@@ -28,7 +28,6 @@ router.register('players', PlayerViewSet)
 router.register('items', ItemViewSet)
 
 urlpatterns = [
-    path('', SiteView.as_view(), name='site_home'),
     path('', include('apps.players.urls')),
     path(
         'accounts/create/',
@@ -42,4 +41,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     # Administration.
     path('admin/', admin.site.urls),
+    # Route all other URLs to React.
+    re_path('^', ReactView.as_view()),
 ]

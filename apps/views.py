@@ -1,5 +1,18 @@
-from django.views.generic import TemplateView
+import os
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.views.generic import View
 
 
-class SiteView(TemplateView):
-    template_name = 'landings/site_home.html'
+class ReactView(View):
+
+    def get(self, request):
+        try:
+            with open(
+                os.path.join(settings.REACT_DIR, 'build', 'index.html')
+            ) as file:
+                return HttpResponse(file.read())
+
+        except Exception:
+            return HttpResponse(status=501)
