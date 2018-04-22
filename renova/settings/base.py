@@ -174,6 +174,6 @@ class Base(Configuration):
             'rest_framework.authentication.TokenAuthentication',
         ),
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
-        'PAGE_SIZE': 100
+        'PAGE_SIZE': 100,
     }
     REST_USE_JWT = True

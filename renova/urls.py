@@ -36,12 +36,10 @@ urlpatterns = [
         name='account_create',
     ),
     path('accounts/', include('allauth.urls')),
-
     # API.
     path('auth/twitch/', TwitchLogin.as_view(), name='twitch_login'),
     path('auth/', include('rest_auth.urls')),
     path('api/', include(router.urls)),
-
     # Administration.
     path('admin/', admin.site.urls),
 ]
