@@ -10,3 +10,10 @@ class ItemFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = models.Item
+
+
+class MonsterFactory(factory.DjangoModelFactory):
+    id = factory.Sequence(lambda i: i)
+
+    class Meta:
+        model = models.Monster

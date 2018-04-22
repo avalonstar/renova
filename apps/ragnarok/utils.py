@@ -90,3 +90,21 @@ EQUIPPABLE_LOCATIONS = {
     pow(2, 20): 'Shadow Right Accessory',
     pow(2, 21): 'Shadow Left Accessory',
 }
+
+MONSTER_SCALE = Choices(
+    (0, 'small', 'Small'), (1, 'medium', 'Medium'), (2, 'large', 'Large')
+)
+
+MONSTER_RACE = Choices(
+    (0, 'formless', 'Formless'),
+    (1, 'undead', 'Undead'),
+    (2, 'brute', 'Brute'),
+    (3, 'plant', 'Plant'),
+    (4, 'insect', 'Insect'),
+    (5, 'fish', 'Fish'),
+    (6, 'demon', 'Demon'),
+    (7, 'demihuman', 'Demi-Human'),
+    (8, 'angel', 'Angel'),
+    (9, 'dragon', 'Dragon'),
+    (10, 'player', 'Player'),
+)

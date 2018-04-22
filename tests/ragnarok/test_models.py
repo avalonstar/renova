@@ -1,7 +1,7 @@
 import pytest
 
-from apps.ragnarok.models import Item
-from apps.ragnarok.factories import ItemFactory
+from apps.ragnarok.models import Item, Monster
+from apps.ragnarok.factories import ItemFactory, MonsterFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -31,3 +31,10 @@ class TestItems:
     def test_equippable_locations(self):
         on_head = ItemFactory(equip_locations=256)
         assert on_head.equippable_locations == ['Upper Headgear']
+
+
+class TestMonsters:
+
+    def test_factory(self):
+        factory = MonsterFactory()
+        assert isinstance(factory, Monster)
