@@ -21,6 +21,8 @@ djangorestframework = "*"
 django-cors-headers = "*"
 django-rest-auth = "*"
 djangorestframework-jwt = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 
 [dev-packages]
