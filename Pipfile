@@ -17,6 +17,12 @@ django-configurations = "*"
 django-compressor = "*"
 django-libsass = "*"
 django-model-utils = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+django-rest-auth = "*"
+djangorestframework-jwt = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 
 [dev-packages]

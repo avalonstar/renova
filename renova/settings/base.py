@@ -11,6 +11,7 @@ class Base(Configuration):
     BASE_DIR = os.path.dirname(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     )
+    REACT_DIR = os.path.join(BASE_DIR, 'frontend')
 
     # Debug Settings.
     # SECURITY WARNING: Don't run with debug turned on in production!
@@ -25,6 +26,7 @@ class Base(Configuration):
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
+        'whitenoise.runserver_nostatic',  # This is required to be here.
         'django.contrib.staticfiles',
         'django.contrib.sites',
     ]
@@ -35,6 +37,10 @@ class Base(Configuration):
         'allauth.socialaccount',
         'allauth.socialaccount.providers.twitch',
         'compressor',
+        'corsheaders',
+        'rest_framework',
+        'rest_framework.authtoken',
+        'rest_auth',
     ]
     ADMINISTRATION = ['django.contrib.admin']
     INSTALLED_APPS = DJANGO + COMPONENTS + PLUGINS + ADMINISTRATION
@@ -42,7 +48,9 @@ class Base(Configuration):
     # Middleware Definition.
     # --------------------------------------------------------------------------
     MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,7 +136,10 @@ class Base(Configuration):
     # --------------------------------------------------------------------------
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATIC_URL = '/static/'
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+        os.path.join(REACT_DIR, 'build', 'static'),
+    ]
     STATICFILES_FINDERS = [
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -138,6 +149,10 @@ class Base(Configuration):
     # django-compressor
     COMPRESS_OFFLINE = True
     COMPRESS_PRECOMPILERS = (('text/x-scss', 'django_libsass.SassCompiler'),)
+
+    # whitenoise
+    # https://warehouse.python.org/project/whitenoise/
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     # Internationalization.
     # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -158,3 +173,14 @@ class Base(Configuration):
     ALLOWED_HOSTS = []
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     SITE_ID = 1
+
+    # Django REST Framework (and related authentication).
+    # --------------------------------------------------------------------------
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.TokenAuthentication',
+        ),
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
+        'PAGE_SIZE': 100,
+    }
+    REST_USE_JWT = True
