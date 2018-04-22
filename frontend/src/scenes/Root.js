@@ -6,36 +6,11 @@ import { ConnectedRouter } from 'react-router-redux';
 import { ThemeProvider } from 'styled-components';
 
 import App from 'scenes/App';
-import { Helmet } from 'components/Common';
-import { Item, Items } from 'scenes/Database';
+import Database from 'scenes/Database';
+import { Helmet, RouteWithLayout } from 'components/Common';
 import { Dashboard } from 'layouts';
 import { foundation } from 'helpers/foundation';
 import { history } from 'store';
-
-const RouteWithLayout = ({ layout, component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      React.createElement(layout, props, React.createElement(component, props))
-    }
-  />
-);
-
-const Database = () => (
-  <Switch>
-    <RouteWithLayout
-      layout={Dashboard}
-      component={Items}
-      exact
-      path="/database/items"
-    />
-    <RouteWithLayout
-      layout={Dashboard}
-      component={Item}
-      path="/database/item/:id"
-    />
-  </Switch>
-);
 
 const Main = () => (
   <Fragment>
